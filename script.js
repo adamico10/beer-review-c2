@@ -2,11 +2,12 @@
 var coffee = [];
 // function invoked when buttom clicked
 function addCoffee(name, category, rating) {
-    coffee.push({"coffeeName": name, "categoryC": category, "userRating": rating})
+    coffee.push({ "coffeeName": name, "categoryC": category, "userRating": rating })
 }
 // what to start when there is a click
-$('.post-coffee').click(function() {
-    addCoffee($('.coffee-input').val(),$('.category-input').val(),$('.selector-input').val())
+$('.post-coffee').click(function () {
+    addCoffee($('.coffee-input').val(), $('.category-input').val(), $('.selector-input').val())
+    renderCoffee();
 }
 )
 
@@ -14,39 +15,42 @@ $('.post-coffee').click(function() {
 function clearList() {
     $('.coffee-list').find('li').remove();
 }
- 
+
 // rendering the results
-$('.render-coffee').click(function() {
-    clearList();   
-    for(var i = 0; i < coffee.length; i++) {
+function renderCoffee() {
+    clearList();
+    for (var i = 0; i < coffee.length; i++) {
         $('.coffee-list').append('<li>' + 'Name : ' + coffee[i].coffeeName + " Category : " + coffee[i].categoryC + " Rating : " + coffee[i].userRating + '</li>')
     }
 }
-)
+
 
 // sorting by rate and rendering
-$('.sort-rating').click(function() {
-    coffee.sort(function(a, b) {
-        return b.userRating - a.userRating    
+var direction = 1;
+function oneWay() {
+    coffee.sort(function (a, b) {
+    return b.userRating - a.userRating})
+    renderCoffee();  
+};
+
+function twoWay() {
+    coffee.sort(function (a, b) {
+        return a.userRating - b.userRating})
+        renderCoffee();        
+    };
+
+
+
+$('.sort-rating').click(function () { 
+    if (direction == 1) {
+        oneWay()
+        direction = 0;
     }
-)
-clearList();   
-for(var i = 0; i < coffee.length; i++) {
-    $('.coffee-list').append('<li>' + 'Name : ' + coffee[i].coffeeName + " Category : " + coffee[i].categoryC + " Rating : " + coffee[i].userRating + '</li>')
-}
-coffee.reverse()    
+    else if(direction == 0) {
+        twoWay()
+        direction = 1;
+    }
 }
 )
 
 
-
-
-
-// coffee.sort(function (coffeeName, categoryC, userRating) {
-
-    /*
-    $('.coffee-list').append('<li>' + )
-    
-    $.each(coffee, function(coffeeName, categoryC) {
-
-*/
