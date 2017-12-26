@@ -26,31 +26,46 @@ function renderCoffee() {
 
 
 // sorting by rate and rendering
-var direction = 1;
-function oneWay() {
-    coffee.sort(function (a, b) {
-    return b.userRating - a.userRating})
-    renderCoffee();  
-};
+// var direction = 1;
+// function oneWay() {
+//     coffee.sort(function (a, b) {
+//     return b.userRating - a.userRating})
+//     renderCoffee();  
+// };
 
-function twoWay() {
-    coffee.sort(function (a, b) {
-        return a.userRating - b.userRating})
-        renderCoffee();        
-    };
+// function twoWay() {
+//     coffee.sort(function (a, b) {
+//         return a.userRating - b.userRating})
+//         renderCoffee();        
+//     };
 
 
 
-$('.sort-rating').click(function () { 
-    if (direction == 1) {
-        oneWay()
-        direction = 0;
-    }
-    else if(direction == 0) {
-        twoWay()
+// $('.sort-rating').click(function () { 
+//     if (direction == 1) {
+//         oneWay()
+//         direction = 0;
+//     }
+//     else if(direction == 0) {
+//         twoWay()
+//         direction = 1;
+//     }
+// }
+// )
+
+var direction = 0;
+
+$('.sort-rating').click(function() {
+    if(direction % 2 === 0) {
+        coffee.sort(function (a, b) {
+            return b.userRating - a.userRating})
         direction = 1;
     }
-}
-)
-
+    else {
+        coffee.sort(function (a, b) {
+            return a.userRating - b.userRating})
+        direction = 0;
+    }
+    renderCoffee();  
+})
 
